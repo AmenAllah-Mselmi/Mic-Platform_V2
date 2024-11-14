@@ -2,13 +2,13 @@
 this the new version of mic platform
 
 # Solution à faire : Proposée par Mariem
-1/ je vous fournit une version stable qui contient globalement les fonctionnalités existantes et fonctionnelles travaillé avant par Mariem et Ghassen
-2/ AmenAllah ajout son traville comme il faut et ou il faut dans cette version (je veux une version bien sans erreur et fonctionnelle) 
-3/ AmenAllah force le commit dans la premiere repo (repo il 9adima) 
-4/ Mariem va tester le pull de la nouvelle version 
-5/ si cv et tout fonctionne bien dans l'ancienne repo , on termine avec 
+## 1/ je vous fournit une version stable qui contient globalement les fonctionnalités existantes et fonctionnelles travaillé avant par Mariem et Ghassen
+## 2/ AmenAllah ajout son traville comme il faut et ou il faut dans cette version (je veux une version bien sans erreur et fonctionnelle) 
+## 3/ AmenAllah force le commit dans la premiere repo (repo il 9adima) 
+## 4/ Mariem va tester le pull de la nouvelle version 
+## 5/ si cv et tout fonctionne bien dans l'ancienne repo , on termine avec 
   sinon on travaille sur la nouvelle repo et on y ajout Ghassen 
-6/ voici une explication du hard commit qui peut vous aider (AmenAllah) 
+## 6/ voici une explication du hard commit qui peut vous aider (AmenAllah) 
 # Git Commit: Forcer un Commit avec `--force` et `--hard`
 
 Ce guide explique comment utiliser les commandes Git pour effectuer un commit "forcé" ou réécrire l'historique d'un dépôt Git en utilisant les options `--force` et `--hard`. Ces actions peuvent être utiles pour résoudre certains conflits, mais doivent être utilisées avec précaution, surtout en collaboration avec d'autres développeurs.
