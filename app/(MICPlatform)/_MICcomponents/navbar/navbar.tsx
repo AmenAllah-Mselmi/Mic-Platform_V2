@@ -173,6 +173,7 @@ export default function Navbar() {
                   }
                   className='block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white md:p-0 md:text-gray-300 md:hover:bg-transparent md:hover:text-primary md:dark:hover:text-primary'
                 >
+                  
                   Sessions
                 </Link>
               )}

@@ -56,13 +56,13 @@ const Page: React.FC = () => {
     const session = sessions.find(session => session._id === id)
     if (session) {
       setEditingSession(session)
-      setOpenDialog(true) // Ouvrir le modal
+      setOpenDialog(true)
     }
   }
 
   const handleCloseDialog = () => {
-    setEditingSession(null) // Réinitialiser l'édition de session
-    setOpenDialog(false) // Fermer le modal
+    setEditingSession(null)
+    setOpenDialog(false)
   }
 
   const handleDeleteSession = async (id: string) => {
@@ -160,7 +160,7 @@ const Page: React.FC = () => {
           </Dialog>
         </Box>
       ) : (
-        <Grid container spacing={7} sx={{ margin: 0, padding: 0 }}>
+        <Grid container spacing={2} sx={{ margin: 4, padding: 0 }}>
           <Grid item xs={12} md={8} sx={{ margin: 0, padding: 0 }}>
             <EnhancedTable
               data={sessions}
@@ -172,7 +172,7 @@ const Page: React.FC = () => {
                   variant='outlined'
                   onClick={() => handleEditSession(row._id)}
                 >
-                  Éditer
+                  Edit
                 </Button>
               )}
             />

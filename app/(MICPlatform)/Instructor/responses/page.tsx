@@ -16,6 +16,7 @@ import PendingIcon from '@mui/icons-material/HourglassEmpty'
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
+import { useSearchParams } from 'next/navigation'
 
 const Page: React.FC = () => {
   const [assignmentId, setAssignmentId] = useState<string | null>(null)
@@ -34,14 +35,13 @@ const Page: React.FC = () => {
     console.log('Sending email with data:', formData)
     // Appelle l'API pour envoyer l'email avec les données de formData
   }
+  const searchParams = useSearchParams()
+  const selectedId = searchParams.get('assignmentId')
 
   useEffect(() => {
-    const selectedId = localStorage.getItem('selectedAssignmentId')
-    if (selectedId) {
-      setAssignmentId(selectedId)
-    }
-
     const fetchData = async () => {
+      console.log(selectedId)
+      console.log('assignmentId')
       try {
         if (selectedId) {
           await fetchResponses(selectedId)
@@ -50,8 +50,12 @@ const Page: React.FC = () => {
         console.error('Erreur lors de la récupération des réponses', error)
       }
     }
-    fetchData()
-  }, [fetchResponses])
+    // Appelle fetchData uniquement si `assignmentId` est défini
+    if (selectedId) {
+      setAssignmentId(selectedId)
+      fetchData()
+    }
+  }, [selectedId, fetchResponses])
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {

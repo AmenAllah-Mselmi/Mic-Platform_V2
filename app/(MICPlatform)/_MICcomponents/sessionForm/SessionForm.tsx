@@ -25,6 +25,7 @@ import { useSessionsStore } from '@/app/store/MyStore/SessionsStore'
 import { toast } from 'react-toastify'
 import InstructorSelect from '../Instructor_UI/InstructorSelect/InstructorSelect'
 import DepartmentSelect from '../Admin_UI/DepartmentSelect/DepartmentSelect'
+import { useAuthStore } from '@/app/store/MyStore/AuthStore'
 
 const sessionSchema = z.object({
   Title: z.string().nonempty({ message: 'Title is required' }),
@@ -56,6 +57,7 @@ export default function SessionForm({
   const fetchSessions = useSessionsStore(state => state.fetchSessions)
   const updateSession = useSessionsStore(state => state.updateSession)
   const addSession = useSessionsStore(state => state.addSession)
+  const user = useAuthStore(state => state.user)
 
   useEffect(() => {
     if (editingSession) {
@@ -68,7 +70,7 @@ export default function SessionForm({
         Instructor: editingSession.Instructor
       })
     }
-  }, [editingSession, form])
+  }, [user.DepartmentId, editingSession, form])
 
   const handleSubmit = async data => {
     try {
@@ -83,13 +85,13 @@ export default function SessionForm({
           ...data,
           InstructorId: data.Instructor
         }
-        await addSession(updatedData, '670792e3ee0e13424434d371')
+        await addSession(updatedData, user.DepartmentId)
         toast.success('Session ajoutée avec succès!', {
           position: 'top-center'
         })
       }
 
-      await fetchSessions('670792e3ee0e13424434d371')
+      await fetchSessions(user.DepartmentId)
       form.reset()
       setEditingSession(null)
       if (onClose) {
@@ -104,11 +106,11 @@ export default function SessionForm({
 
   return (
     <div className='flex h-full flex-col items-center justify-center rounded-xl border bg-slate-300 shadow-2xl'>
-      <div className='w-full max-w-2xl rounded-lg bg-white p-8 shadow-md'>
+      <div className='w-full max-w-2xl rounded-lg bg-white p-3 shadow-md'>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className='grid grid-cols-1 gap-6 p-8'
+            className='grid grid-cols-1 gap-6 p-2'
           >
             <FormField
               control={form.control}
@@ -144,7 +146,7 @@ export default function SessionForm({
               control={form.control}
               name='Date'
               render={({ field }) => (
-                <FormItem className='flex flex-col col-span-2'>
+                <FormItem className='col-span-2 flex flex-col'>
                   <FormLabel>Date</FormLabel>
                   <FormControl>
                     <Controller

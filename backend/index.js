@@ -10,6 +10,7 @@ const dotenv = require('dotenv')
 const response = require('./routes/response_route')
 const attachment = require('./routes/attachment_route')
 const user = require('./routes/user_route')
+const test = require('./routes/test_route')
 
 dotenv.config()
 // Intégration de Swagger à l'URL /api-docs
@@ -52,7 +53,7 @@ app.use('/api/attachment', attachment)
 app.use('/api/response', response)
 app.use('/api/user', user)
 app.use('/api/department', Department)
-
+app.use('/api/test', test)
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}`)
 })

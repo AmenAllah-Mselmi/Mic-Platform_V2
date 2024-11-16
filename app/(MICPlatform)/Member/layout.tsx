@@ -4,15 +4,15 @@ import Navbar from '../_MICcomponents/navbar/navbar'
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <>
-
-    <div
-      style={{ backgroundImage: 'url("/images/Member/MemberBackground.png")' }}
-      className='w-screen min-h-screen bg-cover bg-center z--10 flex justify-center items-center flex-col'
-    >
-      <Navbar/>
-      {children}
-    </div>
-
+      <div
+        style={{
+          backgroundImage: 'url("/images/Member/MemberBackground.png")'
+        }}
+        className='z--10 flex min-h-screen w-screen flex-col items-center justify-center bg-cover bg-center'
+      >
+        <Navbar />
+        {children}
+      </div>
     </>
   )
 }

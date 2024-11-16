@@ -1,10 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import AssignmentCard from '../../_MICcomponents/assignment_UI/AssignmentCard'
+import AssignmentCardForInstructor from '../../_MICcomponents/Instructor_UI/AssignmentCardForInstructor/AssignmentCardForInstructor'
 import { useAssignmentStore } from './../../../store/MyStore/AssignmentsStore'
-import { Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, IconButton, Typography } from '@mui/material'
 import PaginationComponent from '../../_MICcomponents/PaginationComponent/PaginationComponent'
 import { useAuthStore } from '@/app/store/MyStore/AuthStore'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
   const assignments = useAssignmentStore(state => state.assignments)
@@ -32,22 +36,26 @@ const Page = () => {
   const handlePageChange = newPage => {
     setCurrentPage(newPage)
   }
-
+  const router = useRouter()
   return (
     <div className='container mx-auto'>
+      <Button
+        className='rounded-md bg-gradient-to-r from-secondary to-primary text-white'
+        variant='contained'
+        startIcon={<AddCircleOutlineIcon />}
+        onClick={() =>
+          router.push(`/Instructor/create?departmentId=${user.DepartmentId}`)
+        }
+      >
+        Add new Assignment
+      </Button>
       <Grid container spacing={2}>
         {currentAssignments.length > 0 ? (
           currentAssignments.map(assignment => (
             <Grid item xs={12} key={assignment._id}>
-              <AssignmentCard
-                assignment={{
-                  _id: assignment._id,
-                  Title: assignment.Title,
-                  DueDate: assignment.DueDate,
-                  description: assignment.Description,
-                  Attachments: assignment.Attachments
-                }}
-              />
+              <AssignmentCardForInstructor
+                assignment={assignment}
+              ></AssignmentCardForInstructor>
             </Grid>
           ))
         ) : (

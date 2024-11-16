@@ -7,7 +7,7 @@ import AssignmentModal from './AssignmentModal'
 import Link from 'next/link'
 import { useMemberStore } from '@/app/store/MyStore/MembersStore'
 
-// Component: AssignmentCard
+// Component: AssignmentCardForMember
 interface AssignmentCardProps {
   assignment: {
     _id: string
@@ -22,7 +22,6 @@ export default function AssignmentCard({ assignment }: AssignmentCardProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   const HandleNavigate = (id: string, event: React.MouseEvent) => {
-   
     event.preventDefault() // Empêche la navigation par défaut
 
     localStorage.setItem('selectedAssignmentId', id)
@@ -56,12 +55,7 @@ export default function AssignmentCard({ assignment }: AssignmentCardProps) {
 
       <div className='flex h-11 items-center justify-between'>
         <div className='flex h-full'>
-          <Button
-            onClick={event => HandleNavigate(assignment._id, event)}
-            className='h-full w-32 cursor-pointer items-center justify-center rounded-full bg-MIC text-white'
-          >
-            Responses
-          </Button>
+          {/* j'ai supprimer le btn de responses inutile */}
         </div>
 
         <div className='flex h-full'>

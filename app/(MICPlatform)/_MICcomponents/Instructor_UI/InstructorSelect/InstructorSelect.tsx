@@ -9,17 +9,19 @@ import {
   Typography
 } from '@mui/material'
 import { ENDPOINTS } from '@/app/store/constants/api'
+import { useAuthStore } from '@/app/store/MyStore/AuthStore'
 
 const InstructorSelect = ({ form }) => {
   const [instructors, setInstructors] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const user = useAuthStore(state => state.user)
 
   // Function to fetch instructors
   const fetchInstructors = async () => {
     try {
       const response = await axios.post(ENDPOINTS.GET_INSTRUCTORS_NAMES, {
-        DepartmentId: '670792e3ee0e13424434d371' // Dynamic DepartmentId
+        DepartmentId: user.DepartmentId
       })
       setInstructors(response.data.instructors)
       setLoading(false)
@@ -31,8 +33,10 @@ const InstructorSelect = ({ form }) => {
   }
 
   useEffect(() => {
-    fetchInstructors() // API call on component mount
-  }, [])
+    if (user.DepartmentId) {
+      fetchInstructors()
+    }
+  }, [user.DepartmentId])
 
   return (
     <Controller
@@ -40,16 +44,15 @@ const InstructorSelect = ({ form }) => {
       control={form.control}
       render={({ field }) => (
         <FormControl fullWidth variant='outlined' margin='normal'>
-          {/* Loading state */}
           {loading ? (
             <CircularProgress />
           ) : error ? (
             <Typography color='error'>{error}</Typography>
           ) : (
             <Select
-              {...field} // Apply React Hook Form `field`
-              onChange={e => field.onChange(e.target.value)} // Handle selection change
-              value={field.value || ''} // Set selected value
+              {...field}
+              onChange={e => field.onChange(e.target.value)}
+              value={field.value || ''}
               displayEmpty
             >
               <MenuItem value='' disabled>

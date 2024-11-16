@@ -3,7 +3,14 @@ export const ENDPOINTS = {
   // Assignments :
   FETCH_ASSIGNMENTS: (departmentId: string) =>
     `${API_BASE_URL}/member/department/${departmentId}`,
-
+  CREATE_ASSIGNMENT: (departmentId: string) =>
+    `${API_BASE_URL}/assignment/department/${departmentId}/addAssignment`,
+  UPDATE_ASSIGNMENT: (assignmentId: string) =>
+    `${API_BASE_URL}/assignment/updateAssignment/${assignmentId}`,
+  DELETE_ASSIGNMENT: (assignmentId: string) =>
+    `${API_BASE_URL}/assignment/deleteAssignment/${assignmentId}`,
+  FETCH_ALL_Assignements: () => `${API_BASE_URL}/assignment/getAssignments`,
+  
   // Sessions :
   FETCH_SESSIONS_BY_DEPARTMENT: (DepartmentId: string) =>
     `${API_BASE_URL}/session/department/${DepartmentId}`,

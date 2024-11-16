@@ -5,6 +5,7 @@ import { useSessionsStore } from '../../../store/MyStore/SessionsStore'
 
 import { Box, Typography } from '@mui/material'
 import PaginationComponent from '../../_MICcomponents/PaginationComponent/PaginationComponent'
+import { useSearchParams } from 'next/navigation'
 
 const Page = () => {
   const sessions = useSessionsStore(state => state.sessions)
@@ -12,15 +13,18 @@ const Page = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage] = useState(5) // Nombre d'éléments par page
+  const searchParams = useSearchParams()
+  const departmentId = searchParams.get('id_dep') // Récupère l'ID du département
 
   useEffect(() => {
-    const loadSessions = async () => {
-      await fetchSessions('670792e3ee0e13424434d371')
+    const loadSessions = async (departmentId: string) => {
+      await fetchSessions(departmentId)
       console.log('Sessions fetched:', sessions)
     }
-
-    loadSessions()
-  }, [fetchSessions])
+    if (departmentId) {
+      loadSessions(departmentId)
+    }
+  }, [departmentId, fetchSessions])
 
   // Calculer les éléments pour la page actuelle
   const indexOfLastItem = currentPage * itemsPerPage

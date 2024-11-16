@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import AssignmentCard from '../../_MICcomponents/assignment_UI/AssignmentCard'
 import { useAssignmentStore } from './../../../store/MyStore/AssignmentsStore'
-import { Grid, Typography } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 import PaginationComponent from '../../_MICcomponents/PaginationComponent/PaginationComponent'
 import { useAuthStore } from '@/app/store/MyStore/AuthStore'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 const Page = () => {
   const assignments = useAssignmentStore(state => state.assignments)
   const fetchAssignments = useAssignmentStore(state => state.fetchAssignments)
@@ -35,9 +35,16 @@ const Page = () => {
   const handlePageChange = newPage => {
     setCurrentPage(newPage)
   }
+  const router = useRouter()
 
   return (
     <div className='container mx-auto'>
+      <Button
+        onClick={() => router.push(`/Member/sessions?id_dep=${id_dep}`)}
+        className='rounded-md bg-gradient-to-r from-secondary to-primary text-white'
+      >
+        GO TO SESSIONS BY MARIEM
+      </Button>
       <Grid container spacing={2}>
         {currentAssignments.length > 0 ? (
           currentAssignments.map(assignment => (

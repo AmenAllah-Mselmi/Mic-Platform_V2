@@ -3,6 +3,7 @@ import Logo from '../../../../public/images/big-logo.png'
 import Image from 'next/image'
 
 interface Session {
+  Room: string
   _id: string
   Title: string
   Description: string
@@ -42,7 +43,7 @@ const EventCard: React.FC<EventCardProps> = ({ session }) => {
               Date : <h6>{session.Date}</h6>
             </li>
             <li className='mb-2'>
-              <span>Salle:</span> <h6>{session.room}</h6>
+              <span>Salle:</span> <h6>{session.Room}</h6>
             </li>
           </ul>
           <p className='card-text text-justify'>

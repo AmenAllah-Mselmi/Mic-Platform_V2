@@ -78,12 +78,6 @@ const InstructorSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Assignment'
     }
-  ],
-  Session: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Session'
-    }
   ]
 })
 
