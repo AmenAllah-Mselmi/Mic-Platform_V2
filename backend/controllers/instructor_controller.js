@@ -1,7 +1,7 @@
 const { Instructor } = require('../models/user')
 const { department } = require('../models/department')
 const session = require('../models/session')
-const Assignment = require('../models/Assignment')
+const Assignment = require('../models/assignment')
 
 const controller = {
   // created by Mariem
