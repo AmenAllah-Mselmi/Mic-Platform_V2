@@ -29,3 +29,21 @@ La commande `git push --force` permet de pousser vos commits locaux vers le dép
 
 ```bash
 git push --force
+```
+
+### Remarque de Mariem apres test :
+# Partie Member  : 
+1- Partie assignment :  Débordement lorsque la description est long de l'assignment ce qui fais que le btn seeMore n'apparait pas 
+2- Partie Session : non fonctionnelle navigation probleme car y a pas d'execution de requete 
+# Partie Instructor  :
+1 - Partie assignment : il card hethi mta3 il member mouch instructor 
+    remarque sur ui les deux btn aligné update & cancel fil for edition d'un assignment 
+2-  na9is boutton ihizik lil page mta3 add assignment
+3 - ajout mta3 assignment fil ui mta3 il mobile ti5dim fil ui mta3 desktop ma ti5dimich 
+
+
+
+
+
+
+
