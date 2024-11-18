@@ -10,8 +10,7 @@ import {
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Send } from 'lucide-react'
-import { useResponseStore } from '@/app/store/MyStore/ResponseStore' // Importez votre store ici
-import type { Response } from '@/app/store/Models/Response' // Assurez-vous que le chemin est correct
+import { useResponseStore } from '@/app/store/MyStore/ResponseStore'
 import ResponseSearch from '../../Member/testResponse/ResponseSearch'
 import { useAuthStore } from '@/app/store/MyStore/AuthStore'
 
@@ -35,7 +34,7 @@ export default function AssignmentModal({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetchResponses(User_Id) // Simulez l'appel avec l'ID d'utilisateur statique
+        await fetchResponses(User_Id)
       } catch (error) {
         console.error('Erreur lors de la récupération des réponses', error)
       }
@@ -54,7 +53,11 @@ export default function AssignmentModal({
     }
   }
 
-
+  // Function to break content into lines
+  const breakText = (text, maxLength = 80) => {
+    const regex = new RegExp(`.{1,${maxLength}}`, 'g')
+    return text.match(regex)
+  }
 
   return (
     <Modal size={'3xl'} isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -80,18 +83,16 @@ export default function AssignmentModal({
                     </h5>
                     <h6 className='text-sm text-gray-500'>{date}</h6>
                     <p className='mt-2 w-full text-sm text-gray-700 md:text-base'>
-                      {content}
+                      {breakText(content).map((line, idx) => (
+                        <span key={idx}>
+                          {line}
+                          <br />
+                        </span>
+                      ))}
                     </p>
-                    {/*<Link
-                      href={'#'}
-                      className='mt-2 inline-block text-primary hover:underline'
-                    >
-                      Link for some resources: {resources}
-                    </Link>*/}
                   </div>
                 </div>
 
-                {/* Affichage de la réponse correspondante */}
                 <div className='w-full'>
                   <ResponseSearch Assignment_Id={Assignment_Id} />
                 </div>
@@ -114,7 +115,7 @@ export default function AssignmentModal({
                     color='primary'
                     variant='light'
                     className='mt-2 px-1 py-3 md:w-auto'
-                    onClick={handleAddResponse} // Ajoutez la fonction ici
+                    onClick={handleAddResponse}
                   >
                     <Send size={24} />
                   </Button>

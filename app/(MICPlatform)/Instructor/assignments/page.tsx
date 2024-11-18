@@ -10,7 +10,7 @@ import AssignmentCardForInstructor from '../../_MICcomponents/Instructor_UI/Assi
 import EnhancedTable from '../../_MICcomponents/Admin_UI/TableComponent/TableComponent';
 import UpdateAssignmentModal from '../../_MICcomponents/Instructor_UI/AssignmentUpdateModalForInstructor/AssignmentUpdateModalForInstructor';
 import DeleteAssignmentModal from '../../_MICcomponents/Instructor_UI/AssignmentDeleteModalForInstructor/AssignmentDeleteModalForInstructor';
-import AssignmentModal from '../../_MICcomponents/assignment_UI/AssignmentModal';
+import AssignmentModal from '../../_MICcomponents/Instructor_UI/AssignmentModalForInstructor/AssignmentModalForInstructor';
 import { toast } from 'react-toastify';
 import { set } from 'date-fns';
 
@@ -120,6 +120,13 @@ const Page = () => {
         </Box>
       ) : (
         <Box sx={{ width: '90%', mx: 'auto', mt: 5 }}>
+          <Button
+            variant="contained"
+            startIcon={<AddCircleOutlineIcon />}
+            onClick={() => router.push(`/Instructor/create?departmentId=${user.DepartmentId}`)}
+          >
+            Add New Assignment
+          </Button>
           <EnhancedTable
             data={assignments}
             headCells={headCells}

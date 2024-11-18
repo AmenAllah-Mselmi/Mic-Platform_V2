@@ -1,13 +1,12 @@
 'use client'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDisclosure, Button } from '@nextui-org/react'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 
 import { useAssignmentStore } from '@/app/store/MyStore/AssignmentsStore'
 import { Alert, Snackbar } from '@mui/material'
 import UpdateAssignmentModal from '../AssignmentUpdateModalForInstructor/AssignmentUpdateModalForInstructor'
-import AssignmentModal from '../AssignmentModalForInstructor/AssignmentModalForInstructor'
 import DeleteAssignmentModal from '../AssignmentDeleteModalForInstructor/AssignmentDeleteModalForInstructor'
 import { useRouter } from 'next/navigation'
 
@@ -26,11 +25,6 @@ export default function AssignmentCardForInstructor({
 }: AssignmentCardProps) {
   const { updateAssignment, deleteAssignment } = useAssignmentStore()
   const {
-    isOpen: isSeeMoreOpen,
-    onOpen: onSeeMoreOpen,
-    onOpenChange: onSeeMoreOpenChange
-  } = useDisclosure()
-  const {
     isOpen: isEditOpen,
     onOpen: onEditOpen,
     onOpenChange: onEditOpenChange
@@ -42,32 +36,19 @@ export default function AssignmentCardForInstructor({
   } = useDisclosure()
 
   const [snackbarMessage, setSnackbarMessage] = useState('')
+  const [isExpanded, setIsExpanded] = useState(false) // State for toggling description view
+  const maxChars = 100 // Maximum number of characters for truncated view
 
-  useEffect(() => {
-    const selectedId = localStorage.getItem('selectedAssignmentId')
-    console.log('Updated selectedAssignmentId:', selectedId)
-  }, [])
-
-  const handleEditAssignment = async (updatedAssignmentData: any) => {
-    try {
-      await updateAssignment(assignment._id, updatedAssignmentData)
-      setSnackbarMessage('Assignment updated successfully')
-    } catch (error) {
-      setSnackbarMessage('Failed to update assignment')
-      console.error('Error updating assignment', error)
-    }
-  }
-
-  const handleDeleteAssignment = async () => {
-    try {
-      await deleteAssignment(assignment._id)
-      setSnackbarMessage('Assignment deleted successfully')
-    } catch (error) {
-      setSnackbarMessage('Failed to delete assignment')
-      console.error('Error deleting assignment', error)
-    }
-  }
   const router = useRouter()
+
+  const truncatedDescription =
+    assignment.Description.length > maxChars
+      ? `${assignment.Description.slice(0, maxChars)}...`
+      : assignment.Description
+
+  const handleToggleDescription = () => {
+    setIsExpanded(!isExpanded)
+  }
 
   return (
     <div className='mx-auto mb-4 mt-4 flex h-fit w-11/12 flex-col flex-wrap rounded-lg bg-white p-5'>
@@ -86,26 +67,35 @@ export default function AssignmentCardForInstructor({
           </div>
         </div>
         <div className='flex space-x-4'>
-          {/* Edit Icon */}
           <FiEdit
             className='cursor-pointer text-gray-500 hover:text-blue-500'
-            onClick={onEditOpen} // Open the Edit modal
+            onClick={onEditOpen}
             size={20}
           />
-          {/* Delete Icon */}
           <FiTrash
             className='cursor-pointer text-gray-500 hover:text-red-500'
-            onClick={onDeleteOpen} // Open the Delete modal
+            onClick={onDeleteOpen}
             size={20}
           />
         </div>
       </div>
 
       <p className='mt-2 text-justify font-extrabold'>
-        {assignment.Description}
+        {isExpanded ? assignment.Description : truncatedDescription}
       </p>
 
-      <div className='flex h-11 items-center justify-between'>
+      {/* View More / See Less Button */}
+      {assignment.Description.length > maxChars && (
+  <button
+    onClick={handleToggleDescription}
+    className='mt-2 text-blue-500 underline block'
+  >
+    {isExpanded ? 'See Less' : 'View More'}
+  </button>
+)}
+
+
+      <div className='flex h-11 items-center justify-between mt-4'>
         <div className='flex h-full'>
           <Button
             onClick={() =>
@@ -118,31 +108,8 @@ export default function AssignmentCardForInstructor({
             Responses
           </Button>
         </div>
-
-        <div className='flex h-full'>
-          {/*<Button
-            onPress={onSeeMoreOpen}
-            className='h-full w-32 cursor-pointer items-center justify-center rounded-full bg-MIC text-white'
-          >
-            See More
-          </Button>*/}
-        </div>
       </div>
 
-      {/* See More Modal */}
-      <AssignmentModal
-        isOpen={isSeeMoreOpen}
-        onOpenChange={onSeeMoreOpenChange}
-        instructor={assignment.Title}
-        assignmentId={assignment._id}
-        date={assignment.DueDate}
-        content={assignment.Description}
-        resources={assignment.Attachments}
-        imageUrl='/images/Member/JohnDoe.png'
-        placeholder='Submit your github repo link here'
-      />
-
-      {/* Edit Assignment Modal */}
       {isEditOpen && (
         <UpdateAssignmentModal
           isOpen={isEditOpen}
@@ -151,16 +118,31 @@ export default function AssignmentCardForInstructor({
           initialTitle={assignment.Title}
           initialDescription={assignment.Description}
           initialDate={assignment.DueDate}
-          onConfirm={handleEditAssignment}
+          onConfirm={async (updatedAssignmentData: any) => {
+            try {
+              await updateAssignment(assignment._id, updatedAssignmentData)
+              setSnackbarMessage('Assignment updated successfully')
+            } catch (error) {
+              setSnackbarMessage('Failed to update assignment')
+              console.error(error)
+            }
+          }}
         />
       )}
 
-      {/* Delete Assignment Modal */}
       {isDeleteOpen && (
         <DeleteAssignmentModal
           isOpen={isDeleteOpen}
           onClose={onDeleteOpenChange}
-          onConfirm={handleDeleteAssignment}
+          onConfirm={async () => {
+            try {
+              await deleteAssignment(assignment._id)
+              setSnackbarMessage('Assignment deleted successfully')
+            } catch (error) {
+              setSnackbarMessage('Failed to delete assignment')
+              console.error(error)
+            }
+          }}
         />
       )}
 
