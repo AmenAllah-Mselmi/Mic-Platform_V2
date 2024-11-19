@@ -53,7 +53,24 @@ git push --force
   2- lorsque le member a déjà une reponse normalement la partie du submit n'apparait pas (à verifier)   
   3- Partie Session : non fonctionnelle navigation probleme car y a pas d'execution de requete   
 
-  
+#### 19/11/2024   
+# Coté fonctionnalité :
+1- le nom du fichier "departements" à corriger : faute d'orthographe  
+2- le folder "CRUDDepartement" n'existe pas dans le projet meme dans github (verification)  
+3- pour back-end department il ne contient que : (departmentController)   
+          afficher_All   
+          create_Departement   
+          get_Departments_names_and_ids   
+    dans github et dans ma version local lorsque j'ai fait le pull (donc verifie)    
+4- le folder "CRUDInstructors" n'existe pas dans le projet meme dans github (verification)     
+5- lors de la suppression d'un instructor , il sera supprimer du department associé   
+6- remarque orthographe : departementController mais c pas grave    
+7- lors de la modification d'un instructor (dans la fct : "update_Instructor") , pas de pris en compte de modification du password    
+
+8- juste des captures pour mieux comprendre :    
+[![Capture-d-cran-2024-11-19-223210.png](https://i.postimg.cc/FHpjq4N1/Capture-d-cran-2024-11-19-223210.png)](https://postimg.cc/mPczzKcG)
+
+[![Capture-d-cran-2024-11-19-223115.png](https://i.postimg.cc/d008cxV6/Capture-d-cran-2024-11-19-223115.png)](https://postimg.cc/9Dv4G1Tw)
     
     
 
