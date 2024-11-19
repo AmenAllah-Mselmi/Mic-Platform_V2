@@ -53,7 +53,8 @@ router.get('/all', departementController.afficher_All)
  *         description: Département créé avec succès
  */
 router.post('/create', departementController.create_Departement)
-
+router.put('/update/:id', departementController.updateDepartement);
+router.delete('/delete/:id', departementController.deleteDepartement)
 /**
  * @swagger
  * /api/department/names-ids:
@@ -81,5 +82,4 @@ router.post('/create', departementController.create_Departement)
  *         description: Erreur lors de la récupération des départements
  */
 router.get('/names-ids', departementController.get_Departments_names_and_ids)
-
 module.exports = router

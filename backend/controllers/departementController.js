@@ -16,10 +16,11 @@ const controller = {
       const create = await department.create(req.body)
 
       console.log('Request body after creation:', req.body) // Log request body after creation (if this point is reached)
-
+      const DepartmentName = create.DepartmentName
+      const _id = create._id
       res.status(201).json({
-        message: 'Departement created successfully',
-        department: create
+        DepartmentName,
+        _id
       })
     } catch (error) {
       console.error('Error in creating Instructor:', error) // Log the error for better insight
@@ -27,6 +28,27 @@ const controller = {
         .status(400)
         .json({ message: 'Error in creating Instructor', error: error.message })
     }
+  },
+  updateDepartement:async(req,res)=>{
+    const id = req.params.id;
+    const update = await department.updateOne({ _id: id }, req.body);
+    if (update.nModified === 0) {
+      return res
+        .status(404)
+        .json({ message: 'Departement not found or no changes made' });
+    }
+    const DepartmentName = update.DepartmentName
+      const _id = update._id
+    res.status(200).json({  DepartmentName,
+      _id });
+  },
+  deleteDepartement:async(req,res)=>{
+    const id = req.params.id;
+    const deleted = await department.deleteOne({ _id: id });
+    if (deleted.deletedCount === 0) {
+      return res.status(404).json({ message: 'Departement not found' });
+    }
+    res.status(200).json({ message: 'Departement deleted successfully' });
   },
   get_Departments_names_and_ids: async (req, res) => {
     try {

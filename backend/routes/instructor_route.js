@@ -107,6 +107,233 @@ route.post(
   '/create-with-department',
   instructorController.create_Instructor_with_department
 )
+/**
+ * @swagger
+ * /api/instructor/add-session-in-department:
+ *   post:
+ *     summary: Ajouter une session à un département
+ *     description: Ajoute une nouvelle session à un département en l'associant à un instructeur avec les informations fournies dans le corps de la requête.
+ *     tags:
+ *       - Sessions
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               departmentId:
+ *                 type: string
+ *                 example: "615c1bc5e70b7e6f30f8f99c"
+ *                 description: L'ID du département auquel la session sera associée
+ *               instructorId:
+ *                 type: string
+ *                 example: "615c1bc5e70b7e6f30f8f123"
+ *                 description: L'ID de l'instructeur qui gérera la session
+ *               sessionData:
+ *                 type: object
+ *                 properties:
+ *                   Title:
+ *                     type: string
+ *                     example: "Session de mathématiques"
+ *                     description: Le titre de la session
+ *                   Description:
+ *                     type: string
+ *                     example: "Cours de mathématiques pour le niveau intermédiaire"
+ *                     description: La description de la session
+ *                   Date:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2024-10-01T09:00:00Z"
+ *                     description: Date et heure de la session
+ *     responses:
+ *       201:
+ *         description: Session créée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Session added successfully"
+ *                 session:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: "615c1bc5e70b7e6f30f8f456"
+ *                     Title:
+ *                       type: string
+ *                     Description:
+ *                       type: string
+ *                     Date:
+ *                       type: string
+ *                       format: date-time
+ *                     Instructor:
+ *                       type: string
+ *                       example: "615c1bc5e70b7e6f30f8f123"
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     DepartmentId:
+ *                       type: string
+ *                       example: "615c1bc5e70b7e6f30f8f99c"
+ *       404:
+ *         description: Département non trouvé
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Department not found"
+ *       500:
+ *         description: Erreur serveur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error adding session to department"
+ */
+// route.post(
+//   '/add-session-in-department',
+//   instructorController.Instructor_add_Session_In_department
+// )
+/**
+ * @swagger
+ * /api/instructor/{instructorId}:
+ *   get:
+ *     summary: Récupérer les sessions par instructeur
+ *     description: Récupère toutes les sessions associées à un instructeur spécifique en fonction de son ID.
+ *     tags:
+ *       - Sessions
+ *     parameters:
+ *       - name: instructorId
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "615c1bc5e70b7e6f30f8f99c"
+ *           description: L'ID de l'instructeur
+ *     responses:
+ *       200:
+ *         description: Liste des sessions récupérée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   Title:
+ *                     type: string
+ *                     example: "Introduction to AI"
+ *                   Description:
+ *                     type: string
+ *                     example: "Learn the basics of artificial intelligence."
+ *                   Instructor:
+ *                     type: string
+ *                     example: "615c1bc5e70b7e6f30f8f99c"
+ *                   Date:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2024-10-02T10:00:00Z"
+ *       404:
+ *         description: Instructeur non trouvé
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Instructor not found"
+ *       500:
+ *         description: Erreur serveur lors de la récupération des sessions
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error retrieving sessions"
+ */
+// route.get('/:instructorId', instructorController.getSessionsByInstructor)
+
+/**
+ * @swagger
+ * /api/instructor/department/{departmentId}:
+ *   get:
+ *     summary: Récupérer les sessions par département
+ *     description: Récupère toutes les sessions associées à un département spécifique en fonction de son ID.
+ *     tags:
+ *       - "implementer dans interface instructor"
+ *     parameters:
+ *       - name: departmentId
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "615c1bc5e70b7e6f30f8f99c"
+ *           description: L'ID du département
+ *     responses:
+ *       200:
+ *         description: Liste des sessions récupérée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   Title:
+ *                     type: string
+ *                     example: "Advanced Web Development"
+ *                   Description:
+ *                     type: string
+ *                     example: "A deep dive into modern web development practices."
+ *                   Instructor:
+ *                     type: string
+ *                     example: "615c1bc5e70b7e6f30f8f99c"
+ *                   Date:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2024-10-03T14:00:00Z"
+ *       404:
+ *         description: Département non trouvé
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Department not found"
+ *       500:
+ *         description: Erreur serveur lors de la récupération des sessions
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error retrieving sessions"
+ */
+// route.get(
+//   '/department/:departmentId',
+//   instructorController.getSessionsByDepartment
+// )
 
 /**
  * @swagger
@@ -232,6 +459,10 @@ route.post(
  *           type: string
  *           example: "64fbad8b6c598b43d788a839"
  */
+// route.post(
+//   '/assignment/Instructor-add-Assignment-to-Session',
+//   instructorController.Instructor_add_Assignment_to_Session
+// )
 route.post(
   '/assignment/Instructor-add-Assignment-to-Session',
   instructorController.Instructor_add_Assignment_to_Session
@@ -309,6 +540,7 @@ route.post(
   '/get-instructors-names',
   instructorController.get_Instructors_names_and_ids_in_department
 )
+
 
 route.get('/all', instructorController.afficher_All)
 route.put('/update/:id', instructorController.update_Instructor)

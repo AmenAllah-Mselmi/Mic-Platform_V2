@@ -7,41 +7,34 @@ const controller = {
   // created by Mariem
   create_Instructor_with_department: async (req, res) => {
     try {
-      const { departmentId, instructorData } = req.body // Extraction des données du corps de la requête
-
-      // Vérifiez que le département existe
-      const Mydepartment = await department.findById(departmentId) // Correction de 'department' en 'Department'
+      const instructorData = req.body; // Get all data from the request body as one object
+  
+      // Check if the department exists
+      const Mydepartment = await department.findById(instructorData.DepartmentId); // Using 'DepartmentId' from the object
       if (!Mydepartment) {
-        return res.status(404).json({ message: 'Department not found' })
+        return res.status(404).json({ message: 'Department not found' });
       }
-
-      // Créez un nouvel instructeur avec l'ID du département associé
-      const instructor = new Instructor({
-        ...instructorData,
-        DepartmentId: departmentId
-      })
-
-      // Sauvegardez l'instructeur
-      const savedInstructor = await instructor.save()
-
-      // Optionnel : Ajouter l'instructeur au tableau des instructeurs du département (si vous avez un champ 'instructors' dans le modèle de département)
-      Mydepartment.instructors.push(savedInstructor._id) // Ajoute l'instructeur dans le département
-      await Mydepartment.save() // Sauvegarde les changements dans le département
-
-      // Retourner une réponse avec les détails de l'instructeur sauvegardé
+  
+      // Create a new instructor with the department ID
+      const instructor = new Instructor(instructorData); // All data is already combined in 'instructorData'
+  
+      // Save the instructor
+      const savedInstructor = await instructor.save();
+  
+      // Optional: Add the instructor to the department's 'instructors' array
+      Mydepartment.instructors.push(savedInstructor._id); // Add the instructor to the department
+      await Mydepartment.save(); // Save the changes to the department
+  
+      // Return a response with the saved instructor details
       return res.status(201).json({
         message: 'Instructor added successfully',
         instructor: savedInstructor
-      })
+      });
     } catch (error) {
-      console.error(error)
-      return res
-        .status(500)
-        .json({ message: 'Error adding instructor to department' })
+      console.error(error);
+      return res.status(500).json({ message: 'Error adding instructor to department' });
     }
   },
-  // ---------------------------------
-
   get_Instructors_names_and_ids_in_department: async (req, res) => {
     const { DepartmentId } = req.body
 
