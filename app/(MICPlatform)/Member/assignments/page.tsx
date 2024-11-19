@@ -38,12 +38,12 @@ const Page = () => {
   const router = useRouter()
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto mt-32'>
       <Button
         onClick={() => router.push(`/Member/sessions?id_dep=${id_dep}`)}
         className='rounded-md bg-gradient-to-r from-secondary to-primary text-white'
       >
-        GO TO SESSIONS BY MARIEM
+        GO TO SESSIONS 
       </Button>
       <Grid container spacing={2}>
         {currentAssignments.length > 0 ? (

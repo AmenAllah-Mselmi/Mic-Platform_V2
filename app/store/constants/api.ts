@@ -43,5 +43,22 @@ export const ENDPOINTS = {
 
   // Authentification
   LOGIN: `${API_BASE_URL}/user/login`,
-  LOGOUT: `${API_BASE_URL}/user/logout`
+  LOGOUT: `${API_BASE_URL}/user/logout`,
+
+  //Departements :
+  FETCH_DEPARTEMENTS: () =>
+    `${API_BASE_URL}/department/all`,
+  CREATE_DEPARTEMENT: () =>
+    `${API_BASE_URL}/department/create`,
+  UPDATE_DEPARTEMENT: (departmentId: string) => `${API_BASE_URL}/department/update/${departmentId}`,
+  DELETE_DEPARTEMENT: (departmentId: string) => `${API_BASE_URL}/department/delete/${departmentId}`,
+  //Instructors :
+  FETCH_INSTRUCTORS: () =>
+    `${API_BASE_URL}/instructor/all`,
+  CREATE_INSTRUCTOR: () =>
+    `${API_BASE_URL}/instructor/create-with-department`,
+  UPDATE_INSTRUCTOR: (instructorId: string) => `${API_BASE_URL}/instructor/update/${instructorId}`,
+  DELETE_INSTRUCTOR: (instructorId: string) => `${API_BASE_URL}/instructor/delete/${instructorId}`,
+
+
 }

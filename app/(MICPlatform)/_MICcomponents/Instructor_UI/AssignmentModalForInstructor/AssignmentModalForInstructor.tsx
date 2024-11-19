@@ -76,10 +76,6 @@ export default function AssignmentModal({
                     </p>
                   </div>
                 </div>
-
-                <div className='w-full'>
-                  <ResponseSearch Assignment_Id={Assignment_Id} />
-                </div>
               </div>
             </ModalBody>
             <ModalFooter className='flex justify-start'></ModalFooter>
