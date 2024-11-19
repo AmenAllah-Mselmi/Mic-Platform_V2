@@ -72,7 +72,19 @@ git push --force
 
 [![Capture-d-cran-2024-11-19-223115.png](https://i.postimg.cc/d008cxV6/Capture-d-cran-2024-11-19-223115.png)](https://postimg.cc/9Dv4G1Tw)
     
-    
+#### 19/11/2024  2eme fois 
+# Coté fonctionnalité :
+1- le nom du fichier "departements" à corriger : faute d'orthographe  
+3- pour back-end department il ne contient que : (departmentController)   
+          afficher_All   
+          create_Departement   
+          get_Departments_names_and_ids   
+    dans github et dans ma version local lorsque j'ai fait le pull (donc verifie)    
+5- lors de la suppression d'un instructor , il sera supprimer du department associé   
+6- remarque orthographe : departementController mais c pas grave    
+7- lors de la modification d'un instructor (dans la fct : "update_Instructor") , pas de pris en compte de modification du password 
+8- traiti il cas hethi awka ma sarich ajout w affichali ajouter avec sucess . bil3ani jarabit isem dep mouch mil liste ali fil back-end 
+ba3id hethom i5dim il fonctionnalité mta3 il envoie mta3 mail à faire 9abal il meet.
 
 
 
