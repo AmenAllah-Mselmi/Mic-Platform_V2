@@ -86,8 +86,8 @@ git push --force
 8- traiti il cas hethi awka ma sarich ajout w affichali ajouter avec sucess . bil3ani jarabit isem dep mouch mil liste ali fil back-end 
 ba3id hethom i5dim il fonctionnalité mta3 il envoie mta3 mail à faire 9abal il meet.
 
-
-
+#### 20/11/2024 
+ 1 - lors ajout d'un assignment, le fild due date field a ajouter 
 
 
 
